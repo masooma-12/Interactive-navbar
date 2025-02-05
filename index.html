@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Navigation</title>
+    <style>
+        /* General styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s ease-in-out;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            text-align: center;
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        /* Menu items */
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover effect */
+        .nav-item:hover {
+            background: linear-gradient(45deg, #ff00ff, #ffcc00);
+            color: black;
+            transform: scale(1.1);
+            border-radius: 5px;
+        }
+
+        /* Click effect */
+        .nav-item:active {
+            animation: pop 0.2s ease;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        /* Sections */
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home" class="nav-item">Home</a></li>
+            <li><a href="#about" class="nav-item">About</a></li>
+            <li><a href="#services" class="nav-item">Services</a></li>
+            <li><a href="#contact" class="nav-item">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="section">Welcome to Our Website!</section>
+    <section id="about" class="section">Learn more about us.</section>
+    <section id="services" class="section">Explore our services.</section>
+    <section id="contact" class="section">Get in touch with us.</section>
+
+    <script>
+        // Background color change on scroll
+        window.addEventListener("scroll", function() {
+            let scrollPos = window.scrollY;
+            let body = document.body;
+            
+            if (scrollPos < 200) {
+                body.style.backgroundColor = "#1e272e";
+            } else if (scrollPos < 600) {
+                body.style.backgroundColor = "#ff4757";
+            } else if (scrollPos < 1000) {
+                body.style.backgroundColor = "#1abc9c";
+            } else {
+                body.style.backgroundColor = "#eccc68";
+            }
+        });
+
+        // Click animation on menu items
+        document.querySelectorAll(".nav-item").forEach(item => {
+            item.addEventListener("click", function(e) {
+                e.preventDefault();
+                
+                let targetSection = document.querySelector(this.getAttribute("href"));
+                targetSection.scrollIntoView({ behavior: "smooth" });
+
+                // Fun click animation
+                this.style.transform = "rotateY(360deg)";
+                setTimeout(() => this.style.transform = "none", 300);
+            });
+        });
+    </script>
+
+</body>
+</html>
